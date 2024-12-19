@@ -66,7 +66,7 @@ Write-host "#### Deploying new database ####"
 #Extract components from ConnectionString since Invoke-Sqlcmd needs them separately
 $Server = String-Between -source $ConnectionString -start "Server=" -end ";"
 $Database = String-Between -source $ConnectionString -start "Initial Catalog=" -end ";"
-$User = String-Between -source $ConnectionString -start "User Id=" -end ";"
+$User = String-Between -source $ConnectionString -start "User ID=" -end ";"
 $Pass = String-Between -source $ConnectionString -start "Password=" -end ";"
 
 Write-host "## Retrieved ConnectionString from KeyVault"
