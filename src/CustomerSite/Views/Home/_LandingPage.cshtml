@@ -5,6 +5,8 @@
 
 @{
     ViewData["Title"] = "Home";
+    
+    var currentLanguage = ViewBag.Language ?? "ja";
 }
 @if (!Model.ShowWelcomeScreen)
 {
@@ -209,25 +211,57 @@
 else
 {
     <div class="pt-5">
-        <div class="card p-3 ">
-            <div class="text-center">
-                <h1 class="display-4">Welcome</h1>
+        <div class="card p-3">
+            <div class="text-end mb-3">
+                <div class="btn-group" role="group" aria-label="Language Selection">
+                    <button type="button"
+                            class="btn @(currentLanguage == "ja" ? "btn-primary" : "btn-outline-primary")"
+                            onclick="switchLanguage('ja')">
+                        日本語
+                    </button>
+                    <button type="button"
+                            class="btn @(currentLanguage == "en" ? "btn-primary" : "btn-outline-primary")"
+                            onclick="switchLanguage('en')">
+                        English
+                    </button>
+
+                </div>
             </div>
-            <div class="text-left">
-                <p>At R-Vision, we offer cutting-edge solutions to enhance your customer interactions. Our latest innovation, ChatBot Assistance ChatGPT, is designed to revolutionize customer support and streamline communication</p>
-                @* <p>
-                     Get started with integrating your <b> Software as a Service (SaaS) </b> solution with the <b> SaaS fulfillment APIs version 2 in Microsoft commercial marketplace. </b>
-                </p>
-                <p><a href="https://docs.microsoft.com/en-us/azure/marketplace/partner-center-portal/pc-saas-fulfillment-api-v2" target="_blank">Click here </a><span>for the API documentation.</span> </p> *@
+
+            <div id="content-en" style="display: @(currentLanguage == "en" ? "block" : "none")">
+                <div class="text-center">
+                    <h1 class="display-4">Welcome</h1>
+                </div>
+                <div class="text-left">
+                    <p>At R-Vision, we offer cutting-edge solutions to enhance your customer interactions. Our latest innovation, ChatBot Assistance ChatGPT, is designed to revolutionize customer support and streamline communication</p>
+                </div>
+                <div>
+                    <b>To purchase this SaaS offer:</b>
+                    <ul>
+                        <li>Search for resources of type <b>Software as a Service (SaaS)</b></li>
+                        <li>Search for your offer</li>
+                        <li>Click <b>Create</b> to subscribe to the offer</li>
+                        <li>Click <b>Configure Account</b> after the subscription created</li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <b>To purchase this SaaS offer:</b>
-                <ul>
-                    <li>Search for resources of type <b> Software as a Service (SaaS) </b></li>
-                    <li>Search for your offer</li>
-                    <li>Click <b> Create</b> to subscribe to the offer</li>
-                    <li>Click <b>Configure Account </b> after the subscription created</li>
-                </ul>
+
+            <div id="content-ja" style="display: @(currentLanguage == "ja" ? "block" : "none")">
+                <div class="text-center">
+                    <h1 class="display-4">ようこそ</h1>
+                </div>
+                <div class="text-left">
+                    <p>R-Visionでは、お客様とのやり取りを向上させる最先端のソリューションを提供しています。最新のイノベーション、ChatBot Assistance ChatGPTは、カスタマーサポートを革新し、コミュニケーションを効率化するために設計されています。</p>
+                </div>
+                <div>
+                    <b>SaaSオファーを購入するには：</b>
+                    <ul>
+                        <li><b>Software as a Service (SaaS)</b> タイプのリソースを検索</li>
+                        <li>お目当てのオファーを検索</li>
+                        <li><b>作成</b>をクリックしてオファーを購読</li>
+                        <li>サブスクリプション作成後、<b>アカウントの設定</b>をクリック</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -271,5 +305,29 @@ else
                 return valid = false;
         });
         return valid;
+    }
+
+    function switchLanguage(lang) {
+        // Hide all content divs
+        document.getElementById('content-en').style.display = 'none';
+        document.getElementById('content-ja').style.display = 'none';
+
+        // Show the selected language content
+        document.getElementById(`content-${lang}`).style.display = 'block';
+
+        // Update buttons
+        const buttons = document.querySelectorAll('.btn-group button');
+        buttons.forEach(button => {
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-outline-primary');
+        });
+
+        // Highlight active button
+        event.target.classList.remove('btn-outline-primary');
+        event.target.classList.add('btn-primary');
+
+        // Optional: Save language preference
+        // You might want to store this in a cookie or send to server
+        // localStorage.setItem('preferredLanguage', lang);
     }
 </script>
