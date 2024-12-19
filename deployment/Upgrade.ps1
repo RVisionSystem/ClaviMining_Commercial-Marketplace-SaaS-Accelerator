@@ -105,49 +105,49 @@ BEGIN
 END;
 GO"
 
-Invoke-Sqlcmd -query $compatibilityScript -ServerInstance $Server -database $Database -Username $User -Password $Pass
-Write-host "## Ran compatibility script against database"
-Invoke-Sqlcmd -inputFile script.sql -ServerInstance $Server -database $Database -Username $User -Password $Pass
-Write-host "## Ran migration against database"	
+# Invoke-Sqlcmd -query $compatibilityScript -ServerInstance $Server -database $Database -Username $User -Password $Pass
+# Write-host "## Ran compatibility script against database"
+# Invoke-Sqlcmd -inputFile script.sql -ServerInstance $Server -database $Database -Username $User -Password $Pass
+# Write-host "## Ran migration against database"	
 
-Remove-Item -Path ../src/AdminSite/appsettings.Development.json
-Remove-Item -Path script.sql
-Write-host "#### Database Deployment complete ####"	
+# Remove-Item -Path ../src/AdminSite/appsettings.Development.json
+# Remove-Item -Path script.sql
+# Write-host "#### Database Deployment complete ####"	
 
 
 
-Write-host "#### Deploying new code ####" 
+# Write-host "#### Deploying new code ####" 
 
-dotnet publish ../src/AdminSite/AdminSite.csproj -v q -c release -o ../Publish/AdminSite/
-Write-host "## Admin Portal built" 
-dotnet publish ../src/MeteredTriggerJob/MeteredTriggerJob.csproj -v q -c release -o ../Publish/AdminSite/app_data/jobs/triggered/MeteredTriggerJob --runtime win-x64 --self-contained true 
-Write-host "## Metered Scheduler to Admin Portal Built"
-dotnet publish ../src/CustomerSite/CustomerSite.csproj -v q -c release -o ../Publish/CustomerSite
-Write-host "## Customer Portal Built" 
+# dotnet publish ../src/AdminSite/AdminSite.csproj -v q -c release -o ../Publish/AdminSite/
+# Write-host "## Admin Portal built" 
+# dotnet publish ../src/MeteredTriggerJob/MeteredTriggerJob.csproj -v q -c release -o ../Publish/AdminSite/app_data/jobs/triggered/MeteredTriggerJob --runtime win-x64 --self-contained true 
+# Write-host "## Metered Scheduler to Admin Portal Built"
+# dotnet publish ../src/CustomerSite/CustomerSite.csproj -v q -c release -o ../Publish/CustomerSite
+# Write-host "## Customer Portal Built" 
 
-Compress-Archive -Path ../Publish/CustomerSite/* -DestinationPath ../Publish/CustomerSite.zip -Force
-Compress-Archive -Path ../Publish/AdminSite/* -DestinationPath ../Publish/AdminSite.zip -Force
-Write-host "## Code packages prepared." 
+# Compress-Archive -Path ../Publish/CustomerSite/* -DestinationPath ../Publish/CustomerSite.zip -Force
+# Compress-Archive -Path ../Publish/AdminSite/* -DestinationPath ../Publish/AdminSite.zip -Force
+# Write-host "## Code packages prepared." 
 
-Write-host "## Deploying code to Admin Portal"
-az webapp deploy `
-	--resource-group $ResourceGroupForDeployment `
-	--name $WebAppNameAdmin `
-	--src-path "../Publish/AdminSite.zip" `
-	--type zip
-Write-host "## Deployed code to Admin Portal"
+# Write-host "## Deploying code to Admin Portal"
+# az webapp deploy `
+# 	--resource-group $ResourceGroupForDeployment `
+# 	--name $WebAppNameAdmin `
+# 	--src-path "../Publish/AdminSite.zip" `
+# 	--type zip
+# Write-host "## Deployed code to Admin Portal"
 
-Write-host "## Deploying code to Customer Portal"
-az webapp deploy `
-	--resource-group $ResourceGroupForDeployment `
-	--name $WebAppNamePortal `
-	--src-path "../Publish/CustomerSite.zip"  `
-	--type zip
-Write-host "## Deployed code to Customer Portal"
+# Write-host "## Deploying code to Customer Portal"
+# az webapp deploy `
+# 	--resource-group $ResourceGroupForDeployment `
+# 	--name $WebAppNamePortal `
+# 	--src-path "../Publish/CustomerSite.zip"  `
+# 	--type zip
+# Write-host "## Deployed code to Customer Portal"
 
-Remove-Item -Path ../Publish -recurse -Force
-Write-host "#### Code deployment complete ####" 
-Write-host ""
-Write-host "#### Warning!!! ####"
-Write-host "#### If the upgrade is to >=7.5.0, MeterScheduler feature is pre-enabled and changed to DB config instead of the App Service configuration. Please update the IsMeteredBillingEnabled value accordingly in the Admin portal -> Settings page. ####"
-Write-host "#### "
+# Remove-Item -Path ../Publish -recurse -Force
+# Write-host "#### Code deployment complete ####" 
+# Write-host ""
+# Write-host "#### Warning!!! ####"
+# Write-host "#### If the upgrade is to >=7.5.0, MeterScheduler feature is pre-enabled and changed to DB config instead of the App Service configuration. Please update the IsMeteredBillingEnabled value accordingly in the Admin portal -> Settings page. ####"
+# Write-host "#### "
