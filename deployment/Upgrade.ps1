@@ -105,6 +105,15 @@ BEGIN
 END;
 GO"
 
+Write-host "================= [START]TEST SECTION ================="
+Write-host "ConnectionString: $ConnectionString"
+Write-host "Server: $Server"
+Write-host "Database: $Database"
+Write-host "User: $User"
+Write-host "Pass: $Pass"
+Write-host "compatibilityScript: $compatibilityScript"
+Write-host "================= [END]TEST SECTION ================="
+
 # Invoke-Sqlcmd -query $compatibilityScript -ServerInstance $Server -database $Database -Username $User -Password $Pass
 # Write-host "## Ran compatibility script against database"
 # Invoke-Sqlcmd -inputFile script.sql -ServerInstance $Server -database $Database -Username $User -Password $Pass
