@@ -34,6 +34,38 @@ if ($response -ne 'Y' -and $response -ne 'y') {
 # Proceed if the user agrees
 Write-Host "Thank you for agreeing. Proceeding with the script..." -ForegroundColor Green
 
+
+#region Select Tenant / Subscription for deployment
+
+$currentContext = az account show | ConvertFrom-Json
+$currentTenant = $currentContext.tenantId
+$currentSubscription = $currentContext.id
+
+#Get TenantID if not set as argument
+if(!($TenantID)) {    
+    Get-AzTenant | Format-Table
+    if (!($TenantID = Read-Host "⌨  Type your TenantID or press Enter to accept your current one [$currentTenant]")) { $TenantID = $currentTenant }    
+}
+else {
+    Write-Host "🔑 Tenant provided: $TenantID"
+}
+
+#Get Azure Subscription if not set as argument
+if(!($AzureSubscriptionID)) {    
+    Get-AzSubscription -TenantId $TenantID | Format-Table
+    if (!($AzureSubscriptionID = Read-Host "⌨  Type your SubscriptionID or press Enter to accept your current one [$currentSubscription]")) { $AzureSubscriptionID = $currentSubscription }
+}
+else {
+    Write-Host "🔑 Azure Subscription provided: $AzureSubscriptionID"
+}
+
+#Set the AZ Cli context
+az account set -s $AzureSubscriptionID
+Write-Host "🔑 Azure Subscription '$AzureSubscriptionID' selected."
+
+#endregion
+
+
 Function String-Between
 {
 	[CmdletBinding()]
