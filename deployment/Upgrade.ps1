@@ -54,12 +54,14 @@ $KeyVault=$WebAppNamePrefix+"-kv"
 
 #### THIS SECTION DEPLOYS CODE AND DATABASE CHANGES
 Write-host "#### Deploying new database ####"
-Write-host "Geting Connectionstring...." 
+Write-host "Geting ConnectionString...." 
 $ConnectionString = az keyvault secret show `
 	--vault-name $KeyVault `
 	--name "DefaultConnection" `
 	--query "{value:value}" `
 	--output tsv
+
+Write-host "ConnectionString '$ConnectionString'"
 
 # #Extract components from ConnectionString since Invoke-Sqlcmd needs them separately
 # $Server = String-Between -source $ConnectionString -start "Data Source=" -end ";"
