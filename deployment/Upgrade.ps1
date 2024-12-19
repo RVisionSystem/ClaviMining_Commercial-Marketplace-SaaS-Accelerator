@@ -7,7 +7,8 @@
 
 Param(  
    [string][Parameter(Mandatory)]$WebAppNamePrefix, # Prefix used for creating web applications
-   [string][Parameter(Mandatory)]$ResourceGroupForDeployment # Name of the resource group to deploy the resources
+   [string][Parameter(Mandatory)]$ResourceGroupForDeployment, # Name of the resource group to deploy the resources
+   [string][Parameter(Mandatory)]$ConnectionString # ConnectionString of sql with SQLAuthentication(Username, Password), since from originated ConnectionString cannot be use with this script that required 'Server', 'Database', 'User', 'Pass'
 )
 
 # Define the message
@@ -55,15 +56,15 @@ $KeyVault=$WebAppNamePrefix+"-kv"
 #### THIS SECTION DEPLOYS CODE AND DATABASE CHANGES
 Write-host "#### Deploying new database ####"
 
-Write-host "## Retrieving ConnectionString from KeyVault" 
-$ConnectionString = az keyvault secret show `
-	--vault-name $KeyVault `
-	--name "DefaultConnection" `
-	--query "{value:value}" `
-	--output tsv
+# Write-host "## Retrieving ConnectionString from KeyVault" 
+# $ConnectionString = az keyvault secret show `
+# 	--vault-name $KeyVault `
+# 	--name "DefaultConnection" `
+# 	--query "{value:value}" `
+# 	--output tsv
 
 #Extract components from ConnectionString since Invoke-Sqlcmd needs them separately
-$Server = String-Between -source $ConnectionString -start "Data Source=" -end ";"
+$Server = String-Between -source $ConnectionString -start "Server=" -end ";"
 $Database = String-Between -source $ConnectionString -start "Initial Catalog=" -end ";"
 $User = String-Between -source $ConnectionString -start "User Id=" -end ";"
 $Pass = String-Between -source $ConnectionString -start "Password=" -end ";"
