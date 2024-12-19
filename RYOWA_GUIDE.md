@@ -47,6 +47,13 @@ Additional Steps Not Included in the Video Tutorial
 Typically, the `Upgrade.ps1` script requires two parameters: `-WebAppNamePrefix` and `-ResourceGroupForDeployment`. However, this is not enough. When updating from the original repository, conflicts may occur if we want to merge the git changes because` Upgrade.ps1` and other deployment scripts do not match.
 
 ```powershell
+./Upgrade.ps1 `
+-WebAppNamePrefix "UNIQUE-NAME" `
+-ResourceGroupForDeployment "UNIQUE-RG-NAME"
+```
+
+From this in `Upgrade.ps1` script.
+```powershell
 Param(  
    [string][Parameter(Mandatory)]$WebAppNamePrefix, # Prefix used for creating web applications
    [string][Parameter(Mandatory)]$ResourceGroupForDeployment # Name of the resource group to deploy the resources
