@@ -1,3 +1,37 @@
+# ClaviMining Commercial Marketplace Implementation Guide
+
+- [ClaviMining Commercial Marketplace Implementation Guide](#clavimining-commercial-marketplace-implementation-guide)
+  - [How to Plan Offer](#how-to-plan-offer)
+    - [Creating Marketplace Offer](#creating-marketplace-offer)
+    - [Publishing offer](#publishing-offer)
+  - [How to deployment and setting development environment](#how-to-deployment-and-setting-development-environment)
+    - [Prerequisite](#prerequisite)
+    - [Deployment](#deployment)
+    - [Development Environment](#development-environment)
+    - [Upgrade Matters](#upgrade-matters)
+
+---
+
+## How to Plan Offer
+
+### Creating Marketplace Offer
+Follow Microsoft's documentation for most of this process, as it mainly involves providing basic product information. The steps are straightforward, but pay special attention to the **Billing section**.
+
+> Important Note: If you select "Metered" billing, be prepared for additional complexity. This billing model requires more configuration and understanding of usage reporting.
+
+![AMP-PlanOffer-PlanOverview](./docs/images/AMP-PlanOffer-PlanOverview.png)
+
+![AMP-PlanOffer-List01](./docs/images/AMP-PlanOffer-List01.png)
+
+![AMP-PlanOffer-List02](./docs/images/AMP-PlanOffer-List02.png)
+
+### Publishing offer
+Before your offer can be published, ensure it meets all Microsoft's requirements. The platform will display any outstanding items that need attention:
+
+![AMP-PlanOffer-ActionNeeded](./docs/images/AMP-PlanOffer-ActionNeeded.png)
+
+
+
 ## How to deployment and setting development environment
 
 ### Prerequisite
