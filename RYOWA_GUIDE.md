@@ -112,7 +112,7 @@ $Pass = String-Between -source $ConnectionString -start "Password=" -end ";"
 Updating KeyVault Secret:
 ![Image_Updating_KeyVault_Secret](/docs/images/ryowaguide-kv-update-new-version.png)
 
-If you, like me, have many tenants and subscriptions, it is essential to include **Select Tenant and Subscription** lines. This is super helpful because Azure Cloud Shell might use a different tenant or subscription, leading to errors where resources cannot be found.
+If you have many tenants and subscriptions, it is essential to include **Select Tenant and Subscription** lines. This is super helpful because Azure Cloud Shell might use a different tenant or subscription, leading to errors where resources cannot be found.
 
 ```powershell
 #region Select Tenant / Subscription for deployment
