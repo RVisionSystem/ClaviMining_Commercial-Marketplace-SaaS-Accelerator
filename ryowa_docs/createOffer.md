@@ -6,7 +6,7 @@ Create Offer in Partner portal.
 <details>
     <summary>See image plan's description</summary>
 
-![image01](./images/createOffer-01.png)
+![image01](/ryowa_docs/images/createOffer-01.png)
 </details>
 
 <details>
@@ -76,6 +76,6 @@ Create Offer in Partner portal.
 <details>
     <summary>See configuration pricing</summary>
 
-![image02](./images/createOffer-02.png)
-![image03](./images/createOffer-03.png)
+![image02](/ryowa_docs/images/createOffer-02.png)
+![image03](/ryowa_docs/images/createOffer-03.png)
 </details>
