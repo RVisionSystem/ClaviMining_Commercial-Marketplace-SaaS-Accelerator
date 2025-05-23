@@ -19,16 +19,16 @@ Follow Microsoft's documentation for most of this process, as it mainly involves
 
 > Important Note: If you select "Metered" billing, be prepared for additional complexity. This billing model requires more configuration and understanding of usage reporting.
 
-![AMP-PlanOffer-PlanOverview](./docs/images/AMP-PlanOffer-PlanOverview.png)
+![AMP-PlanOffer-PlanOverview](/ryowa_docs/images/AMP-PlanOffer-PlanOverview.png)
 
-![AMP-PlanOffer-List01](./docs/images/AMP-PlanOffer-List01.png)
+![AMP-PlanOffer-List01](/ryowa_docs/images/AMP-PlanOffer-List01.png)
 
-![AMP-PlanOffer-List02](./docs/images/AMP-PlanOffer-List02.png)
+![AMP-PlanOffer-List02](/ryowa_docs/images/AMP-PlanOffer-List02.png)
 
 ### Publishing offer
 Before your offer can be published, ensure it meets all Microsoft's requirements. The platform will display any outstanding items that need attention:
 
-![AMP-PlanOffer-ActionNeeded](./docs/images/AMP-PlanOffer-ActionNeeded.png)
+![AMP-PlanOffer-ActionNeeded](/ryowa_docs/images/AMP-PlanOffer-ActionNeeded.png)
 
 
 
@@ -67,12 +67,12 @@ Can setup after we deployment from previous state can watch [this tutorial](http
 
 Additional Steps Not Included in the Video Tutorial
 - Adding a Firewall in KeyVault to Access Content.
-![Image_Adding_FW_KV](/docs/images/ryowaguide_Image_Adding_FW_KV.png)
+![Image_Adding_FW_KV](/ryowa_docs/images/ryowaguide_Image_Adding_FW_KV.png)
 - Adding a Firewall in SQL Server to Access Resource.
-![Image_Adding_FW_SQLServer](/docs/images/ryowaguide_Image_Adding_FW_SQLServer.png)
+![Image_Adding_FW_SQLServer](/ryowa_docs/images/ryowaguide_Image_Adding_FW_SQLServer.png)
 - Enabling SQL Authentication in SQL Server
-![Image_Enabling_SQLAuthenticate_In_SQLServer](/docs/images/ryowaguide_Image_Enabling_SQLAuthenticate_In_SQLServer.png)
-![Image_Reset_Admin_Password_SQLAuthenticate_In_SQLServer](/docs/images/ryowaguide_Reset_Admin_Password_SQLServer.png)
+![Image_Enabling_SQLAuthenticate_In_SQLServer](/ryowa_docs/images/ryowaguide_Image_Enabling_SQLAuthenticate_In_SQLServer.png)
+![Image_Reset_Admin_Password_SQLAuthenticate_In_SQLServer](/ryowa_docs/images/ryowaguide_Reset_Admin_Password_SQLServer.png)
 
 
 ### Upgrade Matters
@@ -110,7 +110,7 @@ $User = String-Between -source $ConnectionString -start "User ID=" -end ";"
 $Pass = String-Between -source $ConnectionString -start "Password=" -end ";"
 ```
 Updating KeyVault Secret:
-![Image_Updating_KeyVault_Secret](/docs/images/ryowaguide-kv-update-new-version.png)
+![Image_Updating_KeyVault_Secret](/ryowa_docs/images/ryowaguide-kv-update-new-version.png)
 
 If you have many tenants and subscriptions, it is essential to include **Select Tenant and Subscription** lines. This is super helpful because Azure Cloud Shell might use a different tenant or subscription, leading to errors where resources cannot be found.
 
