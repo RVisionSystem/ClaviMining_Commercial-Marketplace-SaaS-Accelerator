@@ -40,12 +40,7 @@ Bind an SSH key with your GitHub account when using Azure Cloud Shell.
 ssh-keygen
 ```
 
-### Deployment
-Simply run to install dotnet
-
-Find valid SDK version 8 here:
-- https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.25/8.0.25.md
-- https://dotnet.microsoft.com/ja-jp/download/dotnet/8.0
+Simply run these commands to install dotnet
 ```powershell
 wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh; `
 chmod +x dotnet-install.sh; `
@@ -53,10 +48,20 @@ chmod +x dotnet-install.sh; `
 $ENV:PATH="$HOME/.dotnet:$ENV:PATH"; `
 dotnet tool install --global dotnet-ef --version 8.0.0;
 ```
+> **If encoutered error SDK** Find valid SDK version 8 here:
+> - https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.25/8.0.25.md
+> - https://dotnet.microsoft.com/ja-jp/download/dotnet/8.0
+
+> **If encountered error "Can not find/run dotnet-install.sh"**:
+> Do switch to `Bash` terminal and then switch back to `Powershell` terminal.
+
 Clone beloved repository
 ```powershell
 git clone -b WHATEVER_YOU_WANT git@github.com:RVisionSystem/ClaviMining_Commercial-Marketplace-SaaS-Accelerator.git
 ```
+
+### Deployment
+
 Run script deploy
 ```powershell
 .\Deploy.ps1 `
