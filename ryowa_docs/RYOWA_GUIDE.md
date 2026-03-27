@@ -42,10 +42,14 @@ ssh-keygen
 
 ### Deployment
 Simply run to install dotnet
+
+Find valid SDK version 8 here:
+- https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.25/8.0.25.md
+- https://dotnet.microsoft.com/ja-jp/download/dotnet/8.0
 ```powershell
 wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh; `
 chmod +x dotnet-install.sh; `
-./dotnet-install.sh -version latest; `
+./dotnet-install.sh -version 8.0.419; `
 $ENV:PATH="$HOME/.dotnet:$ENV:PATH"; `
 dotnet tool install --global dotnet-ef --version 8.0.0;
 ```
