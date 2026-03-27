@@ -1,0 +1,163 @@
+---
+
+SaaS アクセラレータは MIT ライセンスの下でオープンソース ソフトウェアとして提供されており、Microsoft によって<ins>サポートされていません</ins>。
+アクセラレータに関してヘルプが必要な場合や、不具合やフィーチャリクエストを報告したい場合は、この GitHub リポジトリの Issues 機能をご利用ください。
+
+---
+
+# Microsoft Commercial Marketplace - SaaS アプリケーション向けコミュニティコード
+
+<!-- no toc -->
+- [概要](#概要)
+- [用途](#用途)
+- [インストール](#インストール)
+- [Commercial Marketplace ドキュメント](#commercial-marketplace-ドキュメント)
+- [SaaS アクセラレータ概要](#saas-アクセラレータ概要)
+- [プロジェクト](#プロジェクト)
+- [技術とバージョン](#技術とバージョン)
+- [セキュリティ](#セキュリティ)
+- [前提条件](#前提条件)
+- [貢献](#貢献)
+- [開発者](#開発者)
+- [よくある質問](#よくある質問)
+- [ライセンス](#ライセンス)
+
+---
+
+> 📝 この簡単な匿名アンケートで、[SaaS アクセラレータに関するご意見やフィードバック](https://forms.office.com/r/M4dXD5EqhL)をお聞かせください。
+
+---
+
+## 概要
+
+SaaS アクセラレータは、Microsoft パートナーが Microsoft Commercial Marketplace を通じて SaaS ソリューションを販売することを容易にするために設計された、本番対応のソリューションです。Microsoft パートナーは、SaaS アクセラレータを使用して、SaaS ソリューションを Marketplace に導入するプロセスを簡素化できます。これは、すぐに使用できる、コミュニティでサポートされたソリューションで、以下の機能を提供します：
+
+🚀 迅速で簡単なデプロイメント：ローコードで本番対応のソリューションを使用して、15分以内にライブ運用を開始できます。
+
+🔧 ターンキーソリューション：SaaS オファーのすべての技術的前提条件を満たします。
+
+💼 サブスクリプションの簡素化：サブスクリプションワークフローを最適化するためのストリームラインドインターフェース。
+
+💲 柔軟な請求：カスタム請求と価格モデルのための高度な機能。
+
+🛠️ コントロールを維持：すべての顧客サブスクリプションを管理するための専用管理ポータル。
+
+SaaS ゲームを変革しましょう。今すぐ SaaS アクセラレータを活用してください！
+
+## 説明
+
+このプロジェクトは .NET で実装されており、[SaaS Fulfillment API (v2)](https://docs.microsoft.com/en-us/azure/marketplace/partner-center-portal/pc-saas-fulfillment-api-v2) や [Marketplace Metering Service API](https://docs.microsoft.com/en-us/azure/marketplace/partner-center-portal/marketplace-metering-service-apis) を含む commercial marketplace 請求システムを使用しています。SaaS アクセラレータは、典型的な SaaS プラットフォームが marketplace API と相互作用して顧客向けサブスクリプションをプロビジョニングし、ログを有効にし、commercial marketplace サブスクリプションを管理する方法をモデル化しています。SaaS アクセラレータは、そのままインストールするか、要件をサポートするようにカスタマイズできます。
+
+## 最新のアップデートに追従してください！
+
+SaaS アクセラレータプロジェクトチームは定期的に新しいバージョンをリリースしています。アップデートについては、[リリースノートページ](https://github.com/Azure/Commercial-Marketplace-SaaS-Accelerator/releases)をご覧ください。セキュリティパッチ、バグ修正、新機能について最新の状態を保つために、最新リリースに追従することをお勧めします。
+
+SaaS アクセラレータのインストールを更新するには、[こちらで文書化されている](./docs/Installation-Instructions.md#update-to-a-newer-version-of-the-saas-accelerator)**更新スクリプト**を使用してください。
+
+## 用途
+
+このコードは、commercial marketplace SaaS オファーの必要なコンポーネントのリファレンス実装であり、既存の commercial marketplace ドキュメントを補完します。
+
+このプロジェクトは、Microsoft commercial marketplace 向けの SaaS ソリューションを構築する人々の SaaS オファーオンボーディング体験を加速します。そのままインストールして使用するか、特定の要件に合わせてカスタマイズするかにかかわらず、このリファレンス実装は commercial marketplace SaaS オファーで必要なすべての主要コンポーネントを提供します。
+
+> 注：このプロジェクトのサポートはコミュニティベースであり、貢献を歓迎します。貢献に関する詳細は[以下](#貢献)をご覧ください。これは公式にサポートされた Microsoft 製品ではありません。
+
+## インストール
+
+**[インストール手順はこちら](./docs/Installation-Instructions.md)**です。アーキテクチャとスケールされたインストールの考慮事項を詳述するドキュメントも利用可能です。これらの手順に従うことで、通常 20 分以内に SaaS アクセラレータがインストールされます。
+
+**[高度なインストール手順はこちら](./docs/Advanced-Instructions.md)**です。これらは、ローカルで実行する方法や Visual Studio からデプロイする方法など、さまざまなデプロイメントシナリオに対応するための詳細な手順です。
+
+**ビデオ手順** さらに、インストールプロセスに関する短いビデオもあります。[Mastering the Marketplace](https://microsoft.github.io/Mastering-the-Marketplace) を通じて利用可能な [Azure portal cloud shell での SaaS アクセラレータのインストール](https://go.microsoft.com/fwlink/?linkid=2196326)です。
+
+**[新しいバージョンへのアップグレード](./docs/Installation-Instructions.md#update-to-a-newer-version-of-the-saas-accelerator)** リリースを現在のバージョンに移行するには、これらの手順に従ってください。
+
+### 追加の技術文書
+
+<!-- 1. [Advanced installation](docs/Advanced-Instructions.md) - This document details more manual installation instructions and how to set up a local development environment.  -->
+1. [エンタープライズリファレンスアーキテクチャ](docs/Enterprise-Reference-Architecture.md)
+2. [単一リージョンアーキテクチャ](./docs/Enterprise-Reference-Architecture-Single-region.md)
+3. [マルチリージョンアーキテクチャ](./docs/Enterprise-Reference-Architecture-multi-region-saas-rg.md)
+4. [高度なインストールチェックリスト](./docs/Enterprise-Reference-Architecture-Checklist.md)
+
+### 監視
+
+以下のドキュメントは、SaaS アクセラレータによってデプロイされたリソースに対する Azure 監視とアラートの設定方法を提供します：
+
+- [Web App 監視とアラート手順](./docs/WebApp-Monitoring.md)
+- [SQL Server 監視とアラート手順](./docs/SQL-Server-Monitoring.md)
+- [App Registration 認証情報監視とアラート手順](./docs/App-Reg-Monitoring.md)
+
+## Commercial Marketplace ドキュメント
+
+このプロジェクトを使用する前に、SaaS アプリケーションオファーを公開するための重要な概念、アカウント設定、オファー構成要件を理解するために、以下の commercial marketplace ドキュメントリソースを確認してください。
+
+- [Mastering the Marketplace - SaaS Offers](https://aka.ms/MasteringTheMarketplace/saas-accelerator). アクセラレータを使用した Azure Marketplace SaaS オファーのゼロからヒーローまでのトレーニング。
+- [Commercial marketplace ドキュメント](https://docs.microsoft.com/azure/marketplace/). 開始方法とトップ記事
+- [Commercial marketplace における SaaS アプリケーション](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer). SaaS アプリケーションのビジネスポリシーの概要、およびステップバイステップのオファー作成と構成要件。
+- [SaaS fulfillment API (v2)](https://docs.microsoft.com/azure/marketplace/partner-center-portal/pc-saas-fulfillment-api-v2). SaaS アプリケーションサブスクリプションの作成と管理のための API 詳細。
+- [Marketplace metering service API](https://docs.microsoft.com/azure/marketplace/partner-center-portal/marketplace-metering-service-apis). SaaS Fulfillment API と組み合わせて使用すると、イベントベースの請求を可能にする Marketplace Metering Service の API 詳細。
+- [SaaS fulfillment API FAQ](https://docs.microsoft.com/azure/marketplace/partner-center-portal/saas-fulfillment-apis-faq). SaaS Fulfillment API に関するよくある質問。
+
+## SaaS アクセラレータ概要
+
+![Saas Diagram](./docs/images/saasoverview.png)
+
+## プロジェクト
+
+ソース `/src` ディレクトリには、以下の Visual Studio プロジェクトが含まれています。
+
+| プロジェクト | 説明 | ディレクトリ名 |
+| --- | --- | --- |
+| [**カスタマーポータル - サンプル Web アプリケーション**](./src/CustomerSite) | marketplace サブスクリプションの登録、プロビジョニング、アクティベーション方法を実演します。ASP.Net Core 8.0 を使用して実装されており、サンプル Web アプリケーションは Services クライアントライブラリとデータアクセスライブラリを使用して API インタラクションを呼び出し、永続化し、顧客がサブスクリプションとプランを管理する方法を実演するサンプルユーザーインターフェースを提供します。 |CustomerSite|
+| [**パブリッシャーポータル - サンプル Web アプリケーション**](./src/AdminSite) | メータード請求トランザクションで使用される使用イベントの生成方法と、これらのイベントを Marketplace Metering Service API に送信する方法を実演します。 |AdminSite|
+| [**クライアントデータアクセスライブラリ**](./src/DataAccess) | SaaS Fulfillment API (v2) と Marketplace Metering Service API を使用する際に、プラン、marketplace サブスクリプション、および関連するトランザクション属性を永続化する方法を実演します。 |DataAccess |
+| [**Services クライアントライブラリ**](./src/Services) | Customer と Publisher ポータルで使用されるサービスを含み、[クライアントライブラリ](https://github.com/microsoft/commercial-marketplace-client-dotnet) / データベースで marketplace API への呼び出しを調整する POCO クラスが含まれています。|Services |
+| [**単体テストプロジェクト**](./src/Services.Test) | コードベースの検証とテストに役立ちます。 | ServicesTest |
+
+このリポジトリのサンプルコードは、以下に示すように、パブリッシャーの環境で実行されます。メータリング SDK（.NET クラスライブラリ）と、メータリングをサポートするプラン（寸法が定義され有効になっている）に対するサブスクリプションの使用イベントを報告し、以下の画像の SaaS Metering と SaaS Service ブロックにそれぞれ対応するサンプル Web アプリケーション。
+
+![Use case](./docs/images/sdk_overview.png)
+
+## 技術とバージョン
+
+このプロジェクトは、以下の技術とバージョンを使用して開発されています：
+
+- [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [ASP.NET Core Runtime 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [Entity Framework](https://docs.microsoft.com/ef/)
+
+## セキュリティ
+
+アクセラレータコードは脆弱性に対してスキャンされ、安全な構成を使用しています。バージョンは最新のセキュリティガイドラインとの互換性を確保するために確認されています。ベストプラクティスを強化するには、[セキュリティベストプラクティス](./docs/Security-Best-Practices.md)をご覧ください。
+
+## 前提条件
+
+開始する前に、以下の前提条件が満たされていることを確認してください：
+
+- 開発およびテスト目的でアクティブな Azure サブスクリプションが必要です。Azure サブスクリプションを[こちら](https://azure.microsoft.com/free/)で作成してください。
+- commercial marketplace で使用できる Partner Center アカウントが必要です。アカウントを[こちら](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account)で作成してください。
+- 統合開発環境（IDE）の使用をお勧めします：[Visual Studio Code](https://code.visualstudio.com/)、[Visual Studio 2019 / 2022](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16#) など...
+- SaaS アクセラレータは [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) を使用して実装されています
+- データ永続化には [Azure SQL Database](https://azure.microsoft.com/services/sql-database/) と [Entity Framework](https://docs.microsoft.com/ef/) を使用しています。ただし、お好みのデータリポジトリを自由に使用してください。
+
+## 貢献
+
+このプロジェクトでは貢献と提案を歓迎しています。ほとんどの貢献では、あなたが貢献する権利を有し、実際にその権利を私たちに付与することを宣言する貢献者ライセンス契約（CLA）に同意していただく必要があります。詳細については、<https://cla.opensource.microsoft.com> をご覧ください。
+
+プルリクエストを送信すると、CLA ボットが CLA を提供する必要があるかどうかを自動的に判断し、PR を適切に装飾します（例：ステータスチェック、コメント）。ボットによって提供される指示に従ってください。私たちの CLA を使用するすべてのリポジトリで、これを一度だけ実行する必要があります。
+
+このプロジェクトは [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) を採用しています。
+詳細については、[Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) をご覧いただくか、追加の質問やコメントについては [opencode@microsoft.com](mailto:opencode@microsoft.com) にお問い合わせください。
+
+## 開発者
+
+貢献されるコードは、[こちら](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions)で文書化されている C# 仕様とベストプラクティスに従う必要があります。
+
+## よくある質問
+
+よくある質問のリストは[こちら](./docs/FAQs.md)にあります。
+
+## ライセンス
+
+このプロジェクトは [MIT ライセンス](LICENSE) の下でリリースされています。

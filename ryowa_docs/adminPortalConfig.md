@@ -10,10 +10,10 @@ Default of Admin Portal only available for minimum setting, if we need  `Auto Ac
 
 In Admin Portal:
 Go to 'ApplicationConfig' ➡️ 'IsAutomaticProvisioningSupported' click edit from `false` to `true`
-![image01](./images/adminPortalConfig-01.png)
+![image01](/ryowa_docs/images/adminPortalConfig-01.png)
 
 ### Metered Billing
 **NOTE**: only available for **plan** that has metered billing!!
 * If our plan need metered billing we have to focus these:
   
-![image02](./images/adminPortalConfig-02.png)
+![image02](/ryowa_docs/images/adminPortalConfig-02.png)
