@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using Azure.Core;
 using Azure.Identity;
 using Marketplace.SaaS.Accelerator.AdminSite.Controllers;
 using Marketplace.SaaS.Accelerator.DataAccess.Context;
@@ -135,8 +136,11 @@ public class Startup
             fulfillmentBaseApi = new Uri("https://marketplaceapi.microsoft.com/api");
         }
 
+        var marketplaceClientOptions = new MarketplaceSaaSClientOptions();
+        marketplaceClientOptions.AddPolicy(new TermUnitSanitizingPolicy(), HttpPipelinePosition.PerCall);
+
         services
-            .AddSingleton<IFulfillmentApiService>(new FulfillmentApiService(new MarketplaceSaaSClient(fulfillmentBaseApi, creds), config, new FulfillmentApiClientLogger()))
+            .AddSingleton<IFulfillmentApiService>(new FulfillmentApiService(new MarketplaceSaaSClient(fulfillmentBaseApi, creds, marketplaceClientOptions), config, new FulfillmentApiClientLogger()))
             .AddSingleton<IMeteredBillingApiService>(new MeteredBillingApiService(new MarketplaceMeteringClient(creds), config, new SaaSClientLogger<MeteredBillingApiService>()))
             .AddSingleton<SaaSApiClientConfiguration>(config)
             .AddSingleton<KnownUsersModel>(knownUsers);

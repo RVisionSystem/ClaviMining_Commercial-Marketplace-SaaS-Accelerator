@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE file in the project root for license information.
 
+using Azure.Core;
 using Azure.Identity;
 using Marketplace.SaaS.Accelerator.CustomerSite.Controllers;
 using Marketplace.SaaS.Accelerator.CustomerSite.WebHook;
@@ -114,8 +115,11 @@ public class Startup
             fulfillmentBaseApi = new Uri("https://marketplaceapi.microsoft.com/api");
         }
 
+        var marketplaceClientOptions = new MarketplaceSaaSClientOptions();
+        marketplaceClientOptions.AddPolicy(new TermUnitSanitizingPolicy(), HttpPipelinePosition.PerCall);
+
         services
-            .AddSingleton<IFulfillmentApiService>(new FulfillmentApiService(new MarketplaceSaaSClient(fulfillmentBaseApi, creds), config, new FulfillmentApiClientLogger()))
+            .AddSingleton<IFulfillmentApiService>(new FulfillmentApiService(new MarketplaceSaaSClient(fulfillmentBaseApi, creds, marketplaceClientOptions), config, new FulfillmentApiClientLogger()))
             .AddSingleton<SaaSApiClientConfiguration>(config)
             .AddSingleton<ValidateJwtToken>();
 
