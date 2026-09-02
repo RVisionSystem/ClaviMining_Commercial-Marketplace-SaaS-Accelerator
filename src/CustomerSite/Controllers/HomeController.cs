@@ -90,6 +90,8 @@ public class HomeController : BaseController
 
     private readonly IWebNotificationService _webNotificationService;
 
+    private readonly IClaviMiningInternalApiService claviMiningInternalApiService;
+
     private SubscriptionService subscriptionService = null;
 
     private ApplicationLogService applicationLogService = null;
@@ -137,8 +139,10 @@ public class HomeController : BaseController
         ILoggerFactory loggerFactory, 
         IEmailService emailService,
         IWebNotificationService webNotificationService,
-        IAppVersionService appVersionService) : base(appVersionService)
+        IAppVersionService appVersionService,
+        IClaviMiningInternalApiService claviMiningInternalApiService) : base(appVersionService)
     {
+        this.claviMiningInternalApiService = claviMiningInternalApiService;
         this.apiService = apiService;
         this.subscriptionRepository = subscriptionRepo;
         this.subscriptionLogRepository = subscriptionLogsRepo;
@@ -252,6 +256,25 @@ public class HomeController : BaseController
 
                         var currentPlan = this.planRepository.GetById(newSubscription.PlanId);
                         var subscriptionData = await this.apiService.GetSubscriptionByIdAsync(newSubscription.SubscriptionId).ConfigureAwait(false);
+
+                        // Guard against the same organization ending up with two independent,
+                        // separately-billed Marketplace subscriptions (e.g. a second colleague
+                        // clicking "Get it now" without knowing one already exists). Deliberately
+                        // checked here, before AddOrUpdatePartnerSubscriptions/Activate — this
+                        // subscription is still PendingFulfillmentStart, so simply not proceeding
+                        // leaves it for Microsoft's own un-activated-subscription expiry to clean
+                        // up, rather than us having to cancel an already-committed purchase.
+                        var duplicateCheck = await this.claviMiningInternalApiService
+                            .CheckForDuplicateSubscriptionAsync(subscriptionData.Purchaser?.TenantId.ToString())
+                            .ConfigureAwait(false);
+                        if (duplicateCheck.HasActiveSubscription)
+                        {
+                            this.logger?.Info(HttpUtility.HtmlEncode(
+                                $"Blocked duplicate subscription for tenant {subscriptionData.Purchaser?.TenantId.ToString()}, subscription {newSubscription.SubscriptionId}"));
+                            this.ViewBag.AdminEmail = duplicateCheck.AdminEmail;
+                            return this.View("AlreadySubscribed");
+                        }
+
                         var subscribeId = this.subscriptionService.AddOrUpdatePartnerSubscriptions(subscriptionData);
                         if (subscribeId > 0 && subscriptionData.SaasSubscriptionStatus == SubscriptionStatusEnum.PendingFulfillmentStart)
                         {

@@ -1,0 +1,27 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    string adminEmail = ViewBag.AdminEmail;
+}
+<div class="container">
+    <div class="cm-panel-default mt40">
+        <div class="p-3">
+            <p>
+                Your organization already has an active Clavi Mining subscription.
+            </p>
+            @if (!string.IsNullOrEmpty(adminEmail))
+            {
+                <p>
+                    Contact your admin (<a href="mailto:@adminEmail">@adminEmail</a>) to be added to it,
+                    rather than purchasing a second, separately-billed subscription.
+                </p>
+            }
+            else
+            {
+                <p>
+                    Contact your organization's admin to be added to it, rather than purchasing
+                    a second, separately-billed subscription.
+                </p>
+            }
+        </div>
+    </div>
+</div>

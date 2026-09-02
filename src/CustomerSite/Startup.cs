@@ -24,6 +24,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.Marketplace.SaaS;
@@ -122,6 +123,17 @@ public class Startup
             .AddSingleton<IFulfillmentApiService>(new FulfillmentApiService(new MarketplaceSaaSClient(fulfillmentBaseApi, creds, marketplaceClientOptions), config, new FulfillmentApiClientLogger()))
             .AddSingleton<SaaSApiClientConfiguration>(config)
             .AddSingleton<ValidateJwtToken>();
+
+        // Duplicate-subscription guard on the landing page — calls server-api-ts's
+        // own backend, unrelated to the Marketplace Fulfillment API above.
+        services.AddHttpClient();
+        var claviMiningInternalApiBaseUrl = this.Configuration["ClaviMiningInternalApi:BaseUrl"];
+        var claviMiningInternalApiToken = this.Configuration["ClaviMiningInternalApi:Token"];
+        services.AddSingleton<IClaviMiningInternalApiService>(sp => new ClaviMiningInternalApiService(
+            sp.GetRequiredService<IHttpClientFactory>().CreateClient(),
+            claviMiningInternalApiBaseUrl,
+            claviMiningInternalApiToken,
+            sp.GetRequiredService<ILogger<ClaviMiningInternalApiService>>()));
 
         // Add the assembly version
         services.AddSingleton<IAppVersionService>(new AppVersionService(Assembly.GetExecutingAssembly()?.GetName()?.Version));
